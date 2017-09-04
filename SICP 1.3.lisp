@@ -20,7 +20,7 @@ Image saved on Saturday May 17, 2014 at 2:39:25 AM
 1 ]=> (define (min x y)
  		(if  (< x y)
 			x
-			y))	
+			y))
 
 ;Value: min
 
@@ -30,6 +30,14 @@ Image saved on Saturday May 17, 2014 at 2:39:25 AM
 				(sum-of-largest-squares y z x)))
 
 ;Value: sum-of-largest-squares
+
+1 ]=> (sum-of-largest-squares 2 3 1)
+
+;Value: 13
+
+1 ]=> (sum-of-largest-squares 3 1 2)
+
+;Value: 13
 
 1 ]=> (sum-of-largest-squares 1 2 3)
 

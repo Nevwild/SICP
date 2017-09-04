@@ -24,51 +24,6 @@ Image saved on Saturday May 17, 2014 at 2:39:25 AM
 
 ;Value: 3
 
-1 ]=> (+(*2 4)(-4 6))
-
-;The object -4 is not applicable.
-;To continue, call RESTART with an option number:
-; (RESTART 2) => Specify a procedure to use in its place.
-; (RESTART 1) => Return to read-eval-print level 1.
-
-2 error> (+(* 2 4)(- 4 6))
-
-;Value: 6
-
-2 error> (RESTART 2)
-
-
-New procedure: (+(* 2 4)(- 4 6))
-
-;The object 6 is not applicable.
-;To continue, call RESTART with an option number:
-; (RESTART 2) => Specify a procedure to use in its place.
-; (RESTART 1) => Return to read-eval-print level 1.
-
-2 error> (RESTART 2)
-
-
-New procedure: (+ (* 2 4) (- 4 6))
-
-;The object 6 is not applicable.
-;To continue, call RESTART with an option number:
-; (RESTART 2) => Specify a procedure to use in its place.
-; (RESTART 1) => Return to read-eval-print level 1.
-
-2 error> (RESTART 2)
-
-
-New procedure: (+ (* 2 4) (- 4 6))
-
-;The object 6 is not applicable.
-;To continue, call RESTART with an option number:
-; (RESTART 2) => Specify a procedure to use in its place.
-; (RESTART 1) => Return to read-eval-print level 1.
-
-2 error> (RESTART 1)
-
-;Abort!
-
 1 ]=> (+ (* 2 4) (- 4 6))
 
 ;Value: 6
@@ -89,51 +44,12 @@ New procedure: (+ (* 2 4) (- 4 6))
 
 ;Value: #f
 
-1 ]=> (if(and (> b a)(< b(* a b))))
-
-;Ill-formed special form: (if (and ... ...))
-;To continue, call RESTART with an option number:
-; (RESTART 1) => Return to read-eval-print level 1.
-
-2 error> (RESTART 1)
-
-;Abort!
-
-1 ]=> (if(and (> b a)(< b (* a b)))
-b
-)
-
-;Value: 4
-
-1 ]=> (if(and (> b a)(< b (* a b)))
-b
-a
-)
-
-;Value: 4
-
-1 ]=> (if(and (> b a)(< b (* a b)))
-b
-a)
-
-;Value: 4
-
 1 ]=> (if
 		(and 
 			(> b a)
 			(< b (* a b)))
-b
-a
-)
-
-;Value: 4
-
-1 ]=> (if
-		(and 
-			(> b a)
-			(< b (* a b)))
-b
-a
+		b
+		a
 )
 
 ;Value: 4
@@ -148,19 +64,6 @@ a
 
 ;Value: 6
 
-1 ]=> (*((cond ((> a b) a)
-      ((< a b) b)
-		(else -1))))
-
-;The object 4 is not applicable.
-;To continue, call RESTART with an option number:
-; (RESTART 2) => Specify a procedure to use in its place.
-; (RESTART 1) => Return to read-eval-print level 1.
-
-2 error> (RESTART 1)
-
-;Abort!
-
 1 ]=> (*(cond ((> a b) a)
       ((< a b) b)
 		(else -1))
@@ -168,50 +71,5 @@ a
 
 ;Value: 16
 
-1 ]=> (+ (+ 5 4)
-		(- 2 ()))
 
-;The object (), passed as the second argument to integer-subtract, is not the correct type.
-;To continue, call RESTART with an option number:
-; (RESTART 2) => Specify an argument to use in its place.
-; (RESTART 1) => Return to read-eval-print level 1.
-
-2 error> (RESTART 1)
-
-;Abort!
-
-1 ]=> (/ (+ (+ 5 4)
-			(- 2 (- 3
-				(+ 6 (/ 4 5))))
-		(* 3
-			(* 
-				(- 6 2))	
-)
-	
-
-
-
-
-
-
-
-
-
-(/ (+ (+ 5 4)
-			(- 2 (- 3
-				(+ 6 (/ 4 5))))
-		(* 3
-			(* 
-				(- 6 2)
-				(- 2 7))))
-(/ (+ (+ 5 4)
-			(- 2 (- 3
-				(+ 6 (/ 4 5))))
-		(* 3
-			(* 
-				(- 6 2)
-				(- 2 7)))))
-
-
-(RESTART 1)
 
