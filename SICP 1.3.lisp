@@ -1,35 +1,25 @@
-MIT/GNU Scheme running under OS X
+;Exercise 1.3: Define a procedure that takes three numbers as arguments and returns the sum of the squares of the two larger numbers.
 
-Copyright (C) 2014 Massachusetts Institute of Technology
-This is free software; see the source for copying conditions. There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+;defining required functions
 
-Image saved on Saturday May 17, 2014 at 2:39:25 AM
-  Release 9.2 || Microcode 15.3 || Runtime 15.7 || SF 4.41 || LIAR/x86-64 4.118
-  Edwin 3.116
+(define (square x) (* x x))
 
-1 ]=> (define (square x) (* x x))
+(define (sum-of-squares x y)
+ 	(+ (square x) (square y)))
 
-;Value: square
+(define (min x y) 
+ 	(if  (< x y)
+		x
+		y))
 
-1 ]=> (define (sum-of-squares x y)
-  		(+ (square x) (square y)))
+;Solution 1: I really like this solution. Recursion has not been formally introduced at this point beyond a mere mention, but it feels so clean and good to use it in this solution. 
 
-;Value: sum-of-squares
+(define (sum-of-largest-squares x y z)
+		(if (= x(min x(min y z))) ;I dont like this line. I would prefer to have this line be (if (= x(min x y z). How do I define a function that takes an undetermined number of paramaters? Is this what lists are for? 
+			(sum-of-squares y z)
+			(sum-of-largest-squares y z x)))
 
-1 ]=> (define (min x y)
- 		(if  (< x y)
-			x
-			y))
-
-;Value: min
-
-1 ]=> (define (sum-of-largest-squares x y z)
-			(if (= x(min x(min y z)))
-				(sum-of-squares y z)
-				(sum-of-largest-squares y z x)))
-
-;Value: sum-of-largest-squares
+;Solution 1 tests as run in Edwin
 
 1 ]=> (sum-of-largest-squares 2 3 1)
 
@@ -43,4 +33,30 @@ Image saved on Saturday May 17, 2014 at 2:39:25 AM
 
 ;Value: 13
 
-1 ]=> 
+;Solution 2
+;New function definitions
+
+(define (max x y)
+	(if (> x y)
+		x
+		y))
+	
+
+(define (sum-of-largest-squares x y z)
+    (if (= x(max x y) 
+		   (sum-of-squares x (max y z))
+		   (sum-of-squares y (max x z)))))
+
+;Solution 2 tests as run in Edwin
+
+1 ]=> (sum-of-largest-squares 1 2 3)
+
+;Value: 13
+
+1 ]=> (sum-of-largest-squares 3 1 2 )
+
+;Value: 13
+
+1 ]=> (sum-of-largest-squares 2 3 1)
+
+;Value: 13
