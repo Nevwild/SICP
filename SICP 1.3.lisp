@@ -15,7 +15,7 @@
 ;Solution 1: I really like this solution. Recursion has not been formally introduced at this point beyond a mere mention, but it feels so clean and good to use it in this solution. 
 
 (define (sum-of-largest-squares x y z)
-		(if (= x(min x(min y z))) ;I dont like this line. I would prefer to have this line be (if (= x(min x y z). How do I define a function that takes an undetermined number of paramaters? Is this what lists are for? 
+		(if (= x(min x(min y z))) ;I dont like this line. I would prefer to have this line be (if (= x(min x y z). How do I define a function that takes an undetermined number of paramaters? Is this what lists are for? Perhaps a lambda call in the min function?  
 			(sum-of-squares y z)
 			(sum-of-largest-squares y z x)))
 
