@@ -19,8 +19,8 @@
 ;Applicative order evaluation: evaluates the arguments then applies all procedures. 
 (test 0 (p))
 
-;evaluates 0 -> 0
-;evaluates (p) -> (p) -> (p) -> (p) -> (p) -> ∞
+;Evaluates 0 -> 0
+;Evaluates (p) -> (p) -> (p) -> (p) -> (p) -> ∞
 ;This means that (test 0 (p)) will evaluate 0, which produces a value of 0. 
 ;Then it will evaluate (p), which will be recursively called, and be stuck in an infinite loop 
 
@@ -30,7 +30,7 @@
 
 ;The expression (= 0 0) evaluates to #t, and test returns 0 before it has a chance to call (p).
 (if (= 0 0);-> #t 
-	0;-> evaluated and returned
-	(p);-> never evaluated. 
+	0;-> Evaluated and returned
+	(p);-> Never evaluated. 
 
   

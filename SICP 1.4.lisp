@@ -24,6 +24,6 @@
 
 ;If b is not greater than zero, it will be subtracted from a. This cancels out the negative value of b, resulting in the addition of the absolute value of b to a. 
 
-(- 1 -5) ;for someone used to normal notation, this seems as if it could evaluated  as -1 -5 which would evaluate to -6 or -4 if it was read as -1 - -5. However, using prefix notation, it will be run through the interpreter as 1 - -5. This means that you can always add the aboslute value of an argument, but I think that this may not work for more complex mathimatical operations ie: multiplication or division
+(- 1 -5) ;For someone used to normal notation, this seems as if it could evaluated  as -1 -5 which would evaluate to -6 or -4 if it was read as -1 - -5. However, using prefix notation, it will be run through the interpreter as 1 - -5. This means that you can always add the aboslute value of an argument, but I think that this may not work for more complex mathimatical operations ie: multiplication or division
 
 6
