@@ -1,17 +1,36 @@
-MIT/GNU Scheme running under OS X
+;“Exercise 1.5: Ben Bitdiddle has invented a test to determine whether the interpreter he is faced with is using applicative-order evaluation or normal-order evaluation. He defines the following two procedures:”
 
-Copyright (C) 2014 Massachusetts Institute of Technology
-This is free software; see the source for copying conditions. There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+“(define (p) (p))
 
-Image saved on Saturday May 17, 2014 at 2:39:25 AM
-  Release 9.2 || Microcode 15.3 || Runtime 15.7 || SF 4.41 || LIAR/x86-64 4.118
-  Edwin 3.116
+(define (test x y) 
+  (if (= x 0) 
+      0 
+      y))”
 
-1 ]=> 
+;Then he evaluates the expression
 
+(test 0 (p))
+
+;What behavior will Ben observe with an interpreter that uses applicative-order evaluation? What behavior will he observe with an interpreter that uses normal-order evaluation? Explain your answer. (Assume that the evaluation rule for the special form if is the same whether the interpreter is using normal or applicative order: The predicate expression is evaluated first, and the result determines whether to evaluate the consequent or the alternative expression.)”
+
+;Solutions: 
+
+;Case: Applicative Order Evaluation
 ;Applicative order evaluation: evaluates the arguments then applies all procedures. 
-;This means that (test 0 (p)) will evaluate 0, then it will evaluate (p), which will recursively call itself, and be stuck in an infinate loop.
+(test 0 (p))
 
-;Normal order evaluation: arguments are  evaluated by the interperter only when they are needed. 
-;This means that (p) is passed to test without being evaluated. Therefore the expression (= 0 0) evaluates to #t, and test returns 0 before it has a chance to call (p).  
+;evaluates 0 -> 0
+;evaluates (p) -> (p) -> (p) -> (p) -> (p) -> ∞
+;This means that (test 0 (p)) will evaluate 0, which produces a value of 0. 
+;Then it will evaluate (p), which will be recursively called, and be stuck in an infinite loop 
+
+;Case: Normal Order Evaluation
+;Normal order evaluation: arguments are  evaluated by the interperter only when they are needed. "expand then reduce"
+(test 0 (p))
+
+;The expression (= 0 0) evaluates to #t, and test returns 0 before it has a chance to call (p).
+(if (= 0 0);-> #t 
+	0;-> evaluated and returned
+	(p);-> never evaluated. 
+
+  
