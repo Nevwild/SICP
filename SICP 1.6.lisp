@@ -27,7 +27,8 @@
 
 (define (new-if predicate 
                 then-clause 
-                else-clause)
+                else-clause))
+
   (cond (predicate then-clause)
         (else else-clause)))
 ;Eva demonstrates the program for Alyssa:
@@ -121,3 +122,25 @@
 ;Aborting!: maximum recursion depth exceeded
 
 1 ]=> 
+
+;SOLUTION
+
+;What is going on here? 
+;Hypothesis: new-if is a function, so scheme evaluates it using applicative order. 
+;Applicative order evaluates all of the arguments before applying procedures
+;this means the else-clause (sqrt-iter (improve guess x)  is called before the good-enough? procedure.
+;This leads to ∞  
+
+;For example, the else-clause is changed, it does not enter an ∞ loop  
+
+1 ]=> (define (sqrt-iter guess x)
+	(new-if (good-enough? guess x)
+		guess
+		x))
+
+;Value: sqrt-iter
+
+1 ]=> (sqrt 9)
+
+;Value: 9
+
