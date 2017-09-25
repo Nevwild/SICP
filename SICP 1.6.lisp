@@ -144,3 +144,6 @@
 
 ;Value: 9
 
+
+;This means that special forms may be using a normal order. 
+;Perhaps special forms have their own set of control flow directions?
