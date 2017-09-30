@@ -4,10 +4,10 @@
 ;Setup from text:
 
 (define (sqrt-iter guess x)
-	(if (good-enough? guess x)
-		guess
-		(sqrt-iter (improve guess x) 
- 	x)))
+  (if (good-enough? guess x)
+      guess
+    (sqrt-iter (improve guess x) 
+               x)))
 
 (define (average x y) 
   (/ (+ x y) 2))
@@ -30,7 +30,7 @@
                 else-clause))
 
   (cond (predicate then-clause)
-        (else else-clause)))
+        (else else-clause))
 ;Eva demonstrates the program for Alyssa:
 
 (new-if (= 2 3) 0 5)
@@ -86,10 +86,10 @@
 ;Aborting!: maximum recursion depth exceeded
 
 1 ]=> (define (sqrt-iter guess x)
-	(if (good-enough? guess x)
-		guess
-		(sqrt-iter (improve guess x) 
- 	x)))
+        (if (good-enough? guess x)
+            guess
+          (sqrt-iter (improve guess x) 
+                     x)))
 
 ;Value: sqrt-iter
 
@@ -98,10 +98,10 @@
 ;Value: 11.135528727830582
 
 1 ]=> (define (sqrt-iter guess x)
-	(new-if (good-enough? guess x)
-		guess
-		(sqrt-iter (improve guess x) 
- 	x)))
+        (new-if (good-enough? guess x)
+                guess
+                (sqrt-iter (improve guess x) 
+                           x)))
 
 ;Value: sqrt-iter
 
@@ -134,9 +134,9 @@
 ;For example, the else-clause is changed, it does not enter an ∞ loop  
 
 1 ]=> (define (sqrt-iter guess x)
-	(new-if (good-enough? guess x)
-		guess
-		x))
+        (new-if (good-enough? guess x)
+                guess
+                x))
 
 ;Value: sqrt-iter
 
