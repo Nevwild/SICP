@@ -63,7 +63,7 @@
 (define (sqrt x)
   (sqrt-iter 1.0 0 x))
 
-;solution adding extra paramaters block structure 
+;SOLUTION 1: adding extra paramaters block structure 
 
 (define (sqrt x)
   (define (good-enough? guess old-guess)
@@ -87,7 +87,9 @@
 (sqrt 1234567890123456789012345678901234567890)
 ;Value: 3.513641828820144e19
 
-;Solution where good enough compares the difference between the error to a small proportion of x. this requires changing very little of the original procedure. 
+;SOLUTION 2: where good enough compares the difference between the error to a small proportion of x. this requires changing very little of the original procedure. 
+
+;NOTE: After doing exercise 1.8, I found this solution is not as generalizable as Solution 1. 
 (define (sqrt x)
   (define (sqrt-iter guess x)
     (if (good-enough? guess x)
