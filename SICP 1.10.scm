@@ -75,12 +75,12 @@ Values of following expressions
 (g 3)
 ;expands to
 (A 1 3)
-;expands to alternative
+;expands to else
     (A (- 1 1)
        (A 1 (- 3 1)))
 ;simplifies to
         (A 0 (A 1 2))
-;expands to the alternative
+;expands to the else
         (A 0 (A 	(- 1 1)
                 (A 1 (- 2 1))))
 ;simplifies to 
@@ -120,7 +120,51 @@ Values of following expressions
 
 ;Substitution model!
 
+(h 3)
+expands to
+(A 2 3)
+;expands to else
+    (A (- 2 1)
+       (A 2 (- 3 1)))
+;simplifies to
+    (A 1 (A 2 2))
+;expands to
+    (A 1 (A (- 2 1)
+            (A 2 (- 2 1))))
+;simplifies to
+    (A 1 (A 1 (A 2 1)))
+;simplifies
+    (A 1 (A 1 2))
+;expands
+    (A 1 (A (- 1 1))
+       (A 1 (- 2 1)))
+;simplifies
+    (A 1 (A 0 (A 1 1)))
+;smplifies
+   (A 1 (A 0 2))
+;simplifies
+   (A 1 4)
+;expands
+   (A (- 1 1)
+      ( A 1 (- 4 1)))
+;simplifies
+   (A 0 (A 1 3))
+;expands
+   (A 0 (A (- 1 1))
+      (A 1 (- 2 1)))
+;simplifies
+   (A 0 (A 0 (A 1 1)))
+;reduces
+   (A 0 (A 0 2))
+   simplifies
+   (A 0 4)
+   simplifies
+   8
 
+
+                  
+                       
+                                         
 
 (define (k n) (* 5 n n))
 
