@@ -214,11 +214,33 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
                                                              
 
 
-(define (f-ier n n-1 n-2 n-3 running-total goal)
+(define (f-ier n fn-1-result fn-2-result fn-3-result running-total goal)
   (cond (= goal n) running-total
-        ((< n 3) (f-ier (+ n  1) n n-1 n-2 (+ running-total n) goal))
-        (else (f-ier (+ n 1) (+ n-1 (* 2 n-2) (* 3 n-3)) n-1 n-2 goal)))
+        ((< n 3) 
+         (f-ier (+ n  1) 
+                n 
+                fn-1-result 
+                fn-2-result 
+                (+ running-total n) 
+                goal))
+        (else (f-ier (+ n 1) 
+                     (+ fn-1-result 
+                        (* 2 fn-2-result) 
+                        (* 3 fn-3-result)) 
+                     fn-1-result 
+                     fn-2-result 
+                     (+ running-total 
+                        (+ fn-1-result 
+                           (* 2 fn-2-result) 
+                           (* 3 fn-3-result))) 
+                     goal)))
   
+  ;Substitution
+  (f-ier 2 1 0 0 1 6)
+  (cond = 6 2) 1 ;#f
+  ((< 2 3) ;#t
+   (f-ier (+ 2 1)
+          )  
 
 
 
@@ -233,301 +255,301 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
 
 
 
-  ;The following section is the work for the procedure above. It consists of substitution of both tree recursive and linear iterative Fibonacci number computation. I am doing this because I am having a hard time figuring out the iterative procedure for f 
+   ;The following section is the work for the procedure above. It consists of substitution of both tree recursive and linear iterative Fibonacci number computation. I am doing this because I am having a hard time figuring out the iterative procedure for f 
   
-  ;Fib procedure substitution method - recursive
+   ;Fib procedure substitution method - recursive
   
-  (define (fib n)
-    (cond ((= n 0) 0)
-          ((= n 1) 1)
-          (else (+ (fib (- n 1))
-                   (fib (- n 2))))))
+   (define (fib n)
+     (cond ((= n 0) 0)
+           ((= n 1) 1)
+           (else (+ (fib (- n 1))
+                    (fib (- n 2))))))
 
-  (fib 5)
+   (fib 5)
 
-  (cond ((= 5 0) 0)
-        ((= 5 1) 1)
-        (else (+ (fib (- 5 1))
-                 (fib (- 5 2)))))
+   (cond ((= 5 0) 0)
+         ((= 5 1) 1)
+         (else (+ (fib (- 5 1))
+                  (fib (- 5 2)))))
 
-  ;;;;;;;;;;;;;;;;;;reduction
+   ;;;;;;;;;;;;;;;;;;reduction
 
-  (cond ((= 5 0) 0)
-        ((= 5 1) 1)
-        (else (+ (fib (4))
-                 (fib (3)))))
+   (cond ((= 5 0) 0)
+         ((= 5 1) 1)
+         (else (+ (fib (4))
+                  (fib (3)))))
   
-  ;;;;;;;;;;;;;;;;;;expansion
+   ;;;;;;;;;;;;;;;;;;expansion
 
-  (cond ((= 5 0) 0)
-        ((= 5 1) 1)
-        (else (+ (fib 4 
-                      ((cond ((= 4 0) 0)
+   (cond ((= 5 0) 0)
+         ((= 5 1) 1)
+         (else (+ (fib 4 
+                       ((cond ((= 4 0) 0)
+                              ((= 4 1) 1)
+                              (else (+ (fib (- 4 1))
+                                       (fib (- 4 2)))))))
+                  (fib 3
+                       ((cond ((= n 0) 0)
+                              ((= n 1) 1)
+                              (else (+ (fib (- 3 1))
+                                       (fib (- 3 2))))))))))
+    
+   ;;;;;;;;;;;;;;;;;;reduction
+
+   (cond ((= 5 0) 0)
+         ((= 5 1) 1)
+         (else (+ (fib 4
+                       (cond ((= 4 0) 0)
                              ((= 4 1) 1)
-                             (else (+ (fib (- 4 1))
-                                      (fib (- 4 2)))))))
-                 (fib 3
-                      ((cond ((= n 0) 0)
+                             (else (+ (fib (3))
+                                      (fib (2)))))))
+               (fib 3
+                    (cond ((= n 0) 0)
+                          ((= n 1) 1)
+                          (else (+ (fib (2))
+                                   (fib (1))))))))
+    
+   ;;;;;;;;;;;;;;;;;;expansion
+
+   (cond ((= 5 0) 0)
+         ((= 5 1) 1)
+         (else (+ (fib 4
+                       (cond ((= 4 0) 0)
+                             ((= 4 1) 1)
+                             (else (+ (fib 3
+                                           (cond ((= 3 0) 0)
+                                                 ((= 3 1) 1)
+                                                 (else (+ (fib (- 3 1))
+                                                          (fib (- 3 2))))))
+                                      (fib 2
+                                           (cond ((= 2 0) 0)
+                                                 ((= 2 1) 1)
+                                                 (else (+ (fib (- 2 1))
+                                                          (fib (- 2 2))))))))))
+                  (fib 3
+                       (cond ((= n 0) 0)
                              ((= n 1) 1)
-                             (else (+ (fib (- 3 1))
-                                      (fib (- 3 2))))))))))
+                             (else (+ (fib 2
+                                           (cond ((= 2 0) 0)
+                                                 ((= 2 1) 1)
+                                                 (else (+ (fib (- 2 1))
+                                                          (fib (- 2 2))))))
+                                      (fib 1
+                                           (cond ((= 1 0) 0)
+                                                 ((= 1 1) 1)
+                                                 (else (+ (fib (- 1 1))
+                                                          (fib (- 1 2)))))))))))))
     
-  ;;;;;;;;;;;;;;;;;;reduction
+   ;;;;;;;;;;;;;;;;;;reduction
 
-  (cond ((= 5 0) 0)
-        ((= 5 1) 1)
-        (else (+ (fib 4
-                      (cond ((= 4 0) 0)
-                            ((= 4 1) 1)
-                            (else (+ (fib (3))
-                                     (fib (2)))))))
-              (fib 3
-                   (cond ((= n 0) 0)
-                         ((= n 1) 1)
-                         (else (+ (fib (2))
-                                  (fib (1))))))))
-    
-  ;;;;;;;;;;;;;;;;;;expansion
-
-  (cond ((= 5 0) 0)
-        ((= 5 1) 1)
-        (else (+ (fib 4
-                      (cond ((= 4 0) 0)
-                            ((= 4 1) 1)
-                            (else (+ (fib 3
-                                          (cond ((= 3 0) 0)
-                                                ((= 3 1) 1)
-                                                (else (+ (fib (- 3 1))
-                                                         (fib (- 3 2))))))
-                                     (fib 2
-                                          (cond ((= 2 0) 0)
-                                                ((= 2 1) 1)
-                                                (else (+ (fib (- 2 1))
-                                                         (fib (- 2 2))))))))))
-                 (fib 3
-                      (cond ((= n 0) 0)
-                            ((= n 1) 1)
-                            (else (+ (fib 2
-                                          (cond ((= 2 0) 0)
-                                                ((= 2 1) 1)
-                                                (else (+ (fib (- 2 1))
-                                                         (fib (- 2 2))))))
-                                     (fib 1
-                                          (cond ((= 1 0) 0)
-                                                ((= 1 1) 1)
-                                                (else (+ (fib (- 1 1))
-                                                         (fib (- 1 2)))))))))))))
-    
-  ;;;;;;;;;;;;;;;;;;reduction
-
-  (cond ((= 5 0) 0)
-        ((= 5 1) 1)
-        (else (+ (fib 4
-                      (cond ((= 4 0) 0)
-                            ((= 4 1) 1)
-                            (else (+ (fib 3
-                                          (cond ((= 3 0) 0)
-                                                ((= 3 1) 1)
-                                                (else (+ (fib (2))
-                                                         (fib (1)))))))
-                                  (fib 2
-                                       (cond ((= 2 0) 0)
-                                             ((= 2 1) 1)
-                                             (else (+ (fib (1))
-                                                      (fib (0))))))))))
-              (fib 3
-                   (cond ((= n 0) 0)
-                         ((= n 1) 1)
-                         (else (+ (fib 2
-                                       (cond ((= 2 0) 0)
-                                             ((= 2 1) 1)
-                                             (else (+ (fib (1))
-                                                      (fib (0))))))
-                                  (fib 1
-                                       (cond ((= 1 0) 0)
-                                             ((= 1 1) 1);#t
-                                             (else (+ (fib (0))
-                                                      (fib (-1))))))))))))
+   (cond ((= 5 0) 0)
+         ((= 5 1) 1)
+         (else (+ (fib 4
+                       (cond ((= 4 0) 0)
+                             ((= 4 1) 1)
+                             (else (+ (fib 3
+                                           (cond ((= 3 0) 0)
+                                                 ((= 3 1) 1)
+                                                 (else (+ (fib (2))
+                                                          (fib (1)))))))
+                                   (fib 2
+                                        (cond ((= 2 0) 0)
+                                              ((= 2 1) 1)
+                                              (else (+ (fib (1))
+                                                       (fib (0))))))))))
+               (fib 3
+                    (cond ((= n 0) 0)
+                          ((= n 1) 1)
+                          (else (+ (fib 2
+                                        (cond ((= 2 0) 0)
+                                              ((= 2 1) 1)
+                                              (else (+ (fib (1))
+                                                       (fib (0))))))
+                                   (fib 1
+                                        (cond ((= 1 0) 0)
+                                              ((= 1 1) 1);#t
+                                              (else (+ (fib (0))
+                                                       (fib (-1))))))))))))
   
-  ;;;;;;;;;;;;;;;;;;expansion
+   ;;;;;;;;;;;;;;;;;;expansion
 
-  (cond ((= 5 0) 0)
-        ((= 5 1) 1)
-        (else (+ (fib 4
-                      (cond ((= 4 0) 0)
-                            ((= 4 1) 1)
-                            (else (+ (fib 3
-                                          (cond ((= 3 0) 0)
-                                                ((= 3 1) 1)
-                                                (else (+ (fib 2
-                                                              (cond ((= 2 0) 0)
-                                                                    ((= 2 1) 1)
-                                                                    (else (+ (fib 1
-                                                                                  (cond ((= 1 0) 0)
-                                                                                        ((= 1 1) 1);#t
-                                                                                        (else (+ (fib (0))
-                                                                                                 (fib (-1))))))
-                                                                             (fib 0
-                                                                                  (cond ((= 0 0) 0);#t
-                                                                                        ((= n 1) 1)
-                                                                                        (else (+ (fib (- 0 1))
-                                                                                                 (fib (- 0 2)))))))))
-                                                              (fib 1
-                                                                   (cond ((= 1 0) 0)
-                                                                         ((= 1 1) 1);#t
-                                                                         (else (+ (fib (0))
-                                                                                  (fib (-1)))))))))))
-                                     (fib 2
-                                          (cond ((= 2 0) 0)
-                                                ((= 2 1) 1)
-                                                (else (+ (fib 1
-                                                              (cond ((= 1 0) 0)
-                                                                    ((= 1 1) 1);#t
-                                                                    (else (+ (fib (0))
-                                                                             (fib (-1))))))
-                                                         (fib 0
-                                                              (cond ((= 0 0) 0);#t
-                                                                    ((= n 1) 1)
-                                                                    (else (+ (fib (- 0 1))
-                                                                             (fib (- 0 2))))))))))))))
-                 (fib 3
-                      (cond ((= 3 0) 0)
-                            ((= 3 1) 1)
-                            (else (+ (fib 2
-                                          (cond ((= 2 0) 0)
-                                                ((= 2 1) 1)
-                                                (else (+ (fib 1
-                                                              (cond ((= 1 0) 0)
-                                                                    ((= 1 1) 1);#t
-                                                                    (else (+ (fib (0))
-                                                                             (fib (-1))))))
-                                                         (fib 0
-                                                              (cond ((= 0 0) 0);#t
-                                                                    ((= n 1) 1)
-                                                                    (else (+ (fib (- 0 1))
-                                                                             (fib (- 0 2)))))))))
-                                          (fib 1
-                                               (cond ((= 1 0) 0)
-                                                     ((= 1 1) 1);#t
-                                                     (else (+ (fib (0))
-                                                              (fib (-1))))))))))))))
+   (cond ((= 5 0) 0)
+         ((= 5 1) 1)
+         (else (+ (fib 4
+                       (cond ((= 4 0) 0)
+                             ((= 4 1) 1)
+                             (else (+ (fib 3
+                                           (cond ((= 3 0) 0)
+                                                 ((= 3 1) 1)
+                                                 (else (+ (fib 2
+                                                               (cond ((= 2 0) 0)
+                                                                     ((= 2 1) 1)
+                                                                     (else (+ (fib 1
+                                                                                   (cond ((= 1 0) 0)
+                                                                                         ((= 1 1) 1);#t
+                                                                                         (else (+ (fib (0))
+                                                                                                  (fib (-1))))))
+                                                                              (fib 0
+                                                                                   (cond ((= 0 0) 0);#t
+                                                                                         ((= n 1) 1)
+                                                                                         (else (+ (fib (- 0 1))
+                                                                                                  (fib (- 0 2)))))))))
+                                                               (fib 1
+                                                                    (cond ((= 1 0) 0)
+                                                                          ((= 1 1) 1);#t
+                                                                          (else (+ (fib (0))
+                                                                                   (fib (-1)))))))))))
+                                      (fib 2
+                                           (cond ((= 2 0) 0)
+                                                 ((= 2 1) 1)
+                                                 (else (+ (fib 1
+                                                               (cond ((= 1 0) 0)
+                                                                     ((= 1 1) 1);#t
+                                                                     (else (+ (fib (0))
+                                                                              (fib (-1))))))
+                                                          (fib 0
+                                                               (cond ((= 0 0) 0);#t
+                                                                     ((= n 1) 1)
+                                                                     (else (+ (fib (- 0 1))
+                                                                              (fib (- 0 2))))))))))))))
+                  (fib 3
+                       (cond ((= 3 0) 0)
+                             ((= 3 1) 1)
+                             (else (+ (fib 2
+                                           (cond ((= 2 0) 0)
+                                                 ((= 2 1) 1)
+                                                 (else (+ (fib 1
+                                                               (cond ((= 1 0) 0)
+                                                                     ((= 1 1) 1);#t
+                                                                     (else (+ (fib (0))
+                                                                              (fib (-1))))))
+                                                          (fib 0
+                                                               (cond ((= 0 0) 0);#t
+                                                                     ((= n 1) 1)
+                                                                     (else (+ (fib (- 0 1))
+                                                                              (fib (- 0 2)))))))))
+                                           (fib 1
+                                                (cond ((= 1 0) 0)
+                                                      ((= 1 1) 1);#t
+                                                      (else (+ (fib (0))
+                                                               (fib (-1))))))))))))))
   
-  ;;;;;;;;;;;;;;;;;;reduction
+   ;;;;;;;;;;;;;;;;;;reduction
 
-  (cond ((= 5 0) 0)
-        ((= 5 1) 1)
-        (else (+ (fib 4
-                      (cond ((= 4 0) 0)
-                            ((= 4 1) 1)
-                            (else (+ (fib 3
-                                          (cond ((= 3 0) 0)
-                                                ((= 3 1) 1)
-                                                (else (+ (fib 2
-                                                              (cond ((= 2 0) 0)
-                                                                    ((= 2 1) 1)
-                                                                    (else (+ (1)
-                                                                             (0)))))
-                                                         (1)))))
-                                     (fib 2
-                                          (cond ((= 2 0) 0)
-                                                ((= 2 1) 1)
-                                                (else (+ (1)
-                                                         (0)))))))))
-                 (fib 3
-                      (cond ((= 3 0) 0)
-                            ((= 3 1) 1)
-                            (else (+ (fib 2
-                                          (cond ((= 2 0) 0)
-                                                ((= 2 1) 1)
-                                                (else (+ (1)
-                                                         (0)))))
-                                     (1))))))))
+   (cond ((= 5 0) 0)
+         ((= 5 1) 1)
+         (else (+ (fib 4
+                       (cond ((= 4 0) 0)
+                             ((= 4 1) 1)
+                             (else (+ (fib 3
+                                           (cond ((= 3 0) 0)
+                                                 ((= 3 1) 1)
+                                                 (else (+ (fib 2
+                                                               (cond ((= 2 0) 0)
+                                                                     ((= 2 1) 1)
+                                                                     (else (+ (1)
+                                                                              (0)))))
+                                                          (1)))))
+                                      (fib 2
+                                           (cond ((= 2 0) 0)
+                                                 ((= 2 1) 1)
+                                                 (else (+ (1)
+                                                          (0)))))))))
+                  (fib 3
+                       (cond ((= 3 0) 0)
+                             ((= 3 1) 1)
+                             (else (+ (fib 2
+                                           (cond ((= 2 0) 0)
+                                                 ((= 2 1) 1)
+                                                 (else (+ (1)
+                                                          (0)))))
+                                      (1))))))))
 
-  ;;;;;;;;;;;;;;;;;;reduction
+   ;;;;;;;;;;;;;;;;;;reduction
 
-  (cond ((= 5 0) 0)
-        ((= 5 1) 1)
-        (else (+ (fib 4
-                      (cond ((= 4 0) 0)
-                            ((= 4 1) 1)
-                            (else (+ (fib 3
-                                          (cond ((= 3 0) 0)
-                                                ((= 3 1) 1)
-                                                (else (+ (1)
-                                                         (1)))))
-                                     (1)))))
-                 (fib 3
-                      (cond ((= 3 0) 0)
-                            ((= 3 1) 1)
-                            (else (+ (1)
-                                     (1))))))))
+   (cond ((= 5 0) 0)
+         ((= 5 1) 1)
+         (else (+ (fib 4
+                       (cond ((= 4 0) 0)
+                             ((= 4 1) 1)
+                             (else (+ (fib 3
+                                           (cond ((= 3 0) 0)
+                                                 ((= 3 1) 1)
+                                                 (else (+ (1)
+                                                          (1)))))
+                                      (1)))))
+                  (fib 3
+                       (cond ((= 3 0) 0)
+                             ((= 3 1) 1)
+                             (else (+ (1)
+                                      (1))))))))
 
-  ;;;;;;;;;;;;;;;;;;reduction
+   ;;;;;;;;;;;;;;;;;;reduction
 
-  (cond ((= 5 0) 0)
-        ((= 5 1) 1)
-        (else (+ (fib 4
-                      (cond ((= 4 0) 0)
-                            ((= 4 1) 1)
-                            (else (+ (2)
-                                     (1)))))
-                 (2))))
+   (cond ((= 5 0) 0)
+         ((= 5 1) 1)
+         (else (+ (fib 4
+                       (cond ((= 4 0) 0)
+                             ((= 4 1) 1)
+                             (else (+ (2)
+                                      (1)))))
+                  (2))))
 
 
-  ;;;;;;;;;;;;;;;;;;reduction
+   ;;;;;;;;;;;;;;;;;;reduction
 
-  (cond ((= 5 0) 0)
-        ((= 5 1) 1)
-        (else (+ (3)
-                 (2))))
+   (cond ((= 5 0) 0)
+         ((= 5 1) 1)
+         (else (+ (3)
+                  (2))))
 
-  ;;;;;;;;;;;;;;;;;;Answer
+   ;;;;;;;;;;;;;;;;;;Answer
 
-  5
+   5
   
   
-  ;Fib procedure substitution method - iterative
+   ;Fib procedure substitution method - iterative
   
-  (define (fib n) 
-    (fib-iter 1 0 n))
+   (define (fib n) 
+     (fib-iter 1 0 n))
 
-  (define (fib-iter a b count)
-    (if (= count 0)
-        b
-      (fib-iter (+ a b) a (- count 1))))
+   (define (fib-iter a b count)
+     (if (= count 0)
+         b
+       (fib-iter (+ a b) a (- count 1))))
 
-  (fib 5)
-  (fib-iter 1 0 5
-            (if (= count 0)
-                0
-              (fib-iter (+ 1 0) 1 (- 5 1))))
+   (fib 5)
+   (fib-iter 1 0 5
+             (if (= count 0)
+                 0
+               (fib-iter (+ 1 0) 1 (- 5 1))))
 
-  (fib-iter 1 1 4
-            (if (= 4 0)
-                1
-              (fib-iter (+ 1 1) 1 (- 4 1))))
+   (fib-iter 1 1 4
+             (if (= 4 0)
+                 1
+               (fib-iter (+ 1 1) 1 (- 4 1))))
 
-  (fib-iter 2 1 3
-            (if (= 3 0)
-                1
-              (fib-iter (+ 2 1) 2 (- 3 1))))
+   (fib-iter 2 1 3
+             (if (= 3 0)
+                 1
+               (fib-iter (+ 2 1) 2 (- 3 1))))
 
-  (fib-iter 3 2 2
-            (if (= 2 0)
-                2
-              (fib-iter (+ 3 2) 3 (- 2 1))))
+   (fib-iter 3 2 2
+             (if (= 2 0)
+                 2
+               (fib-iter (+ 3 2) 3 (- 2 1))))
 
-  (fib-iter 5 3 1
-            (if (= 1 0)
-                3
-              (fib-iter (+ 5 3) 5 (- 1 1))))
+   (fib-iter 5 3 1
+             (if (= 1 0)
+                 3
+               (fib-iter (+ 5 3) 5 (- 1 1))))
 
-  (fib-iter 8 5 0
-            (if (= 0 0);#t
-                5
-              (fib-iter (+ 8 5) 8 (- 0 1))))
+   (fib-iter 8 5 0
+             (if (= 0 0);#t
+                 5
+               (fib-iter (+ 8 5) 8 (- 0 1))))
 
-  5
+   5
 
 
 
