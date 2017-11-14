@@ -176,88 +176,23 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
         4
 
 ;iterative    
-;Definition of f from the book. 
-
-f(n) = n if n<3
-and 
-f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
 
 
-;my answer, as I'm working on it. 
 
-(define (f x)
-  (f-ier 1 ))
 
-(define (f-ier n x)
-  (cond (< n 3) n
-        (= n 0) n;I dont like this
-        (else 
-    
-         
-         n-1 n-2 n-3
+
+
+
+
+
+
+
+
+
+;The following section is the work for the procedure above. It consists of substitution of both tree recursive and linear iterative Fibonacci number computation. I am doing this because I am having a hard time figuring out the iterative procedure for f.                      
+                         
   
-         )))
-  
-  
-;f-ier substitution
-
-(f 5)
-(f-ier (1 5 0) 
-       (cond (< 5 3) 5;#f
-             (= 5 0) 5;#f
-             (else (f-ier (+ 1 0 0) (+ 0 1)))))     
-             
-               
-
-;What if you hold the answers of (f(- n 1) 2f(- n 2) 3f(- n 3))))
-;you dont need to. you only need to hold the previous -2 and -3 because the previous answer is n... right?
-                                                             
-
-
-(define (f-ier n fn-1-result fn-2-result fn-3-result running-total goal)
-  (cond (= goal n) running-total
-        ((< n 3) 
-         (f-ier (+ n  1) 
-                n 
-                fn-1-result 
-                fn-2-result 
-                (+ running-total n) 
-                goal))
-        (else (f-ier (+ n 1) 
-                     (+ fn-1-result 
-                        (* 2 fn-2-result) 
-                        (* 3 fn-3-result)) 
-                     fn-1-result 
-                     fn-2-result 
-                     (+ running-total 
-                        (+ fn-1-result 
-                           (* 2 fn-2-result) 
-                           (* 3 fn-3-result))) 
-                     goal)))
-  
-  ;Substitution
-  (f-ier 2 1 0 0 1 6)
-  (cond = 6 2) 1 ;#f
-  ((< 2 3) ;#t
-   (f-ier (+ 2 1)
-          )  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ;The following section is the work for the procedure above. It consists of substitution of both tree recursive and linear iterative Fibonacci number computation. I am doing this because I am having a hard time figuring out the iterative procedure for f 
-  
-   ;Fib procedure substitution method - recursive
+;Fib procedure substitution method - recursive
   
    (define (fib n)
      (cond ((= n 0) 0)
@@ -272,14 +207,14 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
          (else (+ (fib (- 5 1))
                   (fib (- 5 2)))))
 
-   ;;;;;;;;;;;;;;;;;;reduction
+;;;;;;;;;;;;;;;;;;reduction
 
    (cond ((= 5 0) 0)
          ((= 5 1) 1)
          (else (+ (fib (4))
                   (fib (3)))))
   
-   ;;;;;;;;;;;;;;;;;;expansion
+;;;;;;;;;;;;;;;;;;expansion
 
    (cond ((= 5 0) 0)
          ((= 5 1) 1)
@@ -294,7 +229,7 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
                               (else (+ (fib (- 3 1))
                                        (fib (- 3 2))))))))))
     
-   ;;;;;;;;;;;;;;;;;;reduction
+;;;;;;;;;;;;;;;;;;reduction
 
    (cond ((= 5 0) 0)
          ((= 5 1) 1)
@@ -309,7 +244,7 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
                           (else (+ (fib (2))
                                    (fib (1))))))))
     
-   ;;;;;;;;;;;;;;;;;;expansion
+;;;;;;;;;;;;;;;;;;expansion
 
    (cond ((= 5 0) 0)
          ((= 5 1) 1)
@@ -340,7 +275,7 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
                                                  (else (+ (fib (- 1 1))
                                                           (fib (- 1 2)))))))))))))
     
-   ;;;;;;;;;;;;;;;;;;reduction
+;;;;;;;;;;;;;;;;;;reduction
 
    (cond ((= 5 0) 0)
          ((= 5 1) 1)
@@ -371,7 +306,7 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
                                               (else (+ (fib (0))
                                                        (fib (-1))))))))))))
   
-   ;;;;;;;;;;;;;;;;;;expansion
+;;;;;;;;;;;;;;;;;;expansion
 
    (cond ((= 5 0) 0)
          ((= 5 1) 1)
@@ -434,7 +369,7 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
                                                       (else (+ (fib (0))
                                                                (fib (-1))))))))))))))
   
-   ;;;;;;;;;;;;;;;;;;reduction
+;;;;;;;;;;;;;;;;;;reduction
 
    (cond ((= 5 0) 0)
          ((= 5 1) 1)
@@ -465,7 +400,7 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
                                                           (0)))))
                                       (1))))))))
 
-   ;;;;;;;;;;;;;;;;;;reduction
+;;;;;;;;;;;;;;;;;;reduction
 
    (cond ((= 5 0) 0)
          ((= 5 1) 1)
@@ -484,7 +419,7 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
                              (else (+ (1)
                                       (1))))))))
 
-   ;;;;;;;;;;;;;;;;;;reduction
+;;;;;;;;;;;;;;;;;;reduction
 
    (cond ((= 5 0) 0)
          ((= 5 1) 1)
@@ -496,19 +431,19 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
                   (2))))
 
 
-   ;;;;;;;;;;;;;;;;;;reduction
+;;;;;;;;;;;;;;;;;;reduction
 
    (cond ((= 5 0) 0)
          ((= 5 1) 1)
          (else (+ (3)
                   (2))))
 
-   ;;;;;;;;;;;;;;;;;;Answer
+;;;;;;;;;;;;;;;;;;Answer
 
    5
   
   
-   ;Fib procedure substitution method - iterative
+;Fib procedure substitution method - iterative
   
    (define (fib n) 
      (fib-iter 1 0 n))
@@ -551,6 +486,87 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
 
    5
 
+
+
+
+
+
+
+;MARK- Iterative work
+;Definition of f from the book. 
+
+f(n) = n if n<3
+and 
+f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
+
+
+;my answer, as I'm working on it. 
+
+(define (f x)
+  (f-ier 1 ))
+
+(define (f-ier n x)
+  (cond (< n 3) n
+        (= n 0) n;I dont like this
+        (else 
+    
+         
+         n-1 n-2 n-3
+  
+         )))
+  
+  
+;f-ier substitution
+
+(f 5)
+(f-ier (1 5 0) 
+       (cond (< 5 3) 5;#f
+             (= 5 0) 5;#f
+             (else (f-ier (+ 1 0 0) (+ 0 1)))))     
+             
+               
+
+;What if you hold the answers of (f(- n 1) 2f(- n 2) 3f(- n 3))))
+;you dont need to. you only need to hold the previous -2 and -3 because the previous answer is n... right?
+                                                             
+
+
+(define (f-ier n fn-1-result fn-2-result fn-3-result goal)
+  (cond (= goal n) running-total
+        ((< n 3) 
+         (f-ier (+ n  1) 
+                n 
+                fn-1-result 
+                fn-2-result 
+                fn-3-result
+                goal))
+        (else (f-ier (+ n 1) 
+                     (+ fn-1-result 
+                        (* 2 fn-2-result) 
+                        (* 3 fn-3-result)) 
+                     fn-1-result 
+                     fn-2-result 
+                     goal))))
+  
+;Substitution
+(f-ier 3 2 1 0 4)
+  (cond (= 4 2) (+ fn-1-result 
+                   (* 2 fn-2-result) 
+                   (* 3 fn-3-result))
+        (f-ier (+ n  1) 
+               n 
+               fn-1-result 
+               fn-2-result 
+               fn-3-result
+               goal))
+
+        (else (f-ier (+ n 1) 
+                     (+ fn-1-result 
+                        (* 2 fn-2-result) 
+                        (* 3 fn-3-result)) 
+                     fn-1-result 
+                     fn-2-result 
+                     goal))))
 
 
 
