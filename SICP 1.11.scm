@@ -20,16 +20,15 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
 ;Iterative
 
 (define (f n)
-  (f-ier 2 1 0 3 n))
+  (f-ier 2 1 0 n))
   
-(define (f-ier fn-1 fn-2 fn-3 n goal)
-  (cond ((= n goal) (+ fn-1 (* 2 fn-2) (* 3 fn-3)))
-        ((< goal 3) goal)
-        (else (f-ier (+ fn-1 (* 2 fn-2) (* 3 fn-3)) 
-                     fn-1 
-                     fn-2 
-                     (+ n 1) 
-                     goal))))
+(define (f-ier fn-1 fn-2 fn-3 n)
+  (if (<= n 3) 
+    (+ fn-1 (* 2 fn-2) (* 3 fn-3))
+    (f-ier (+ fn-1 (* 2 fn-2) (* 3 fn-3)) 
+           fn-1 
+           fn-2 
+           (- n 1))))
 
 
 ;WORK FOR RECURSIVE
@@ -605,4 +604,38 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
                       goal)))
 
 25
+
+
+;Another iterative solution. Counting down, -1 paramater, -1 LOC
+
+(define (f n)
+  (f-ier 2 1 0 n))
+  
+(define (f-ier fn-1 fn-2 fn-3 n)
+  (if (<= n 3) 
+    (+ fn-1 (* 2 fn-2) (* 3 fn-3))
+    (f-ier (+ fn-1 (* 2 fn-2) (* 3 fn-3)) 
+           fn-1 
+           fn-2 
+           (- n 1) 
+           )))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
