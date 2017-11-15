@@ -20,15 +20,19 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
 ;Iterative
 
 (define (f n)
-  (f-ier 2 1 0 n))
-  
-(define (f-ier fn-1 fn-2 fn-3 n)
-  (if (<= n 3) 
-    (+ fn-1 (* 2 fn-2) (* 3 fn-3))
-    (f-ier (+ fn-1 (* 2 fn-2) (* 3 fn-3)) 
-           fn-1 
-           fn-2 
-           (- n 1))))
+  (define (f-er fn-1 fn-2 fn-3 n goal)
+    (cond ((= n goal) (+ fn-1 
+                         (* 2 fn-2) 
+                         (* 3 fn-3)))
+          ((< goal 3) goal)
+          (else (f-er (+ fn-1 
+                         (* 2 fn-2) 
+                         (* 3 fn-3)) 
+                      fn-1 
+                      fn-2 
+                      (+ n 1) 
+                      goal))))           
+  (f-er 2 1 0 3 n))
 
 
 ;WORK FOR RECURSIVE
@@ -530,9 +534,9 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
 ;my answer, as I'm working on it. 
 
 (define (f x)
-  (f-ier 1 ))
+  (f-er 1 ))
 
-(define (f-ier n x)
+(define (f-er n x)
   (cond (< n 3) n
         (= n 0) n;I dont like this
         (else 
@@ -543,13 +547,13 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
          )))
   
   
-;f-ier substitution
+;f-er substitution
 
 (f 5)
-(f-ier (1 5 0) 
-       (cond (< 5 3) 5;#f
-             (= 5 0) 5;#f
-             (else (f-ier (+ 1 0 0) (+ 0 1)))))     
+(f-er (1 5 0) 
+      (cond (< 5 3) 5;#f
+            (= 5 0) 5;#f
+            (else (f-er (+ 1 0 0) (+ 0 1)))))     
              
                
 
@@ -558,50 +562,63 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
                                                              
 
 (define (f n)
-  (f-ier 2 1 0 3 n))
+  (f-er 2 1 0 3 n))
   
-(define (f-ier fn-1 fn-2 fn-3 n goal)
+(define (f-er fn-1 fn-2 fn-3 n goal)
   (cond ((= n goal) (+ fn-1 (* 2 fn-2) (* 3 fn-3)))
         ((< goal 3) goal)
-        (else (f-ier (+ fn-1 (* 2 fn-2) (* 3 fn-3)) 
-                     fn-1 
-                     fn-2 
-                     (+ n 1) 
-                     goal))))
+        (else (f-er (+ fn-1 (* 2 fn-2) (* 3 fn-3)) 
+                    fn-1 
+                    fn-2 
+                    (+ n 1) 
+                    goal))))
+
+;Cleaned up
+(define (f n)
+  (define (f-er fn-1 fn-2 fn-3 n goal)
+    (cond ((= n goal) (+ fn-1 (* 2 fn-2) (* 3 fn-3)))
+          ((< goal 3) goal)
+          (else (f-er (+ fn-1 (* 2 fn-2) (* 3 fn-3)) 
+                      fn-1 
+                      fn-2 
+                      (+ n 1) 
+                      goal))))           
+  (f-er 2 1 0 3 n))
+  
   
 ;Substitution
 
 (define (f 5)
-  (f-ier 2 1 0 3 5))
+  (f-er 2 1 0 3 5))
   
-(f-ier 2 1 0 3 5)
+(f-er 2 1 0 3 5)
   (cond ((= 3 5) (+ 2 (* 2 1) (* 3 0)));#f
         ((< 5 3) 5);#f
-        (else (f-ier  (+ 2 (* 2 1) (* 3 0)) 
-                      2 
-                      1 
-                      (+ 3 1) 
-                      5)))
+        (else (f-er  (+ 2 (* 2 1) (* 3 0)) 
+                     2 
+                     1 
+                     (+ 3 1) 
+                     5)))
 
 
-(f-ier 4 2 1 4 5)
+(f-er 4 2 1 4 5)
   (cond ((= 4 5) (+ 4 (* 2 2) (* 3 1)));#f
         ((< 5 3) 5);#f
-        (else (f-ier  (+ 4 (* 2 2) (* 3 1)) 
-                      4 
-                      2
-                      (+ 4 1) 
-                      5)))
+        (else (f-er  (+ 4 (* 2 2) (* 3 1)) 
+                     4 
+                     2
+                     (+ 4 1) 
+                     5)))
 
 
-(f-ier 11 4 2 5 5)
+(f-er 11 4 2 5 5)
   (cond ((= 5 5) (+ 11 (* 2 4) (* 3 2)));#t
         ((< goal 3) goal)
-        (else (f-ier  (+ fn-1 (* 2 fn-2) (* 3 fn-3)) 
-                      fn-1 
-                      fn-2 
-                      (+ n 1) 
-                      goal)))
+        (else (f-er  (+ fn-1 (* 2 fn-2) (* 3 fn-3)) 
+                     fn-1 
+                     fn-2 
+                     (+ n 1) 
+                     goal)))
 
 25
 
@@ -609,16 +626,15 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
 ;Another iterative solution. Counting down, -1 paramater, -1 LOC
 
 (define (f n)
-  (f-ier 2 1 0 n))
+  (f-er 2 1 0 n))
   
-(define (f-ier fn-1 fn-2 fn-3 n)
-  (if (<= n 3) 
-    (+ fn-1 (* 2 fn-2) (* 3 fn-3))
-    (f-ier (+ fn-1 (* 2 fn-2) (* 3 fn-3)) 
-           fn-1 
-           fn-2 
-           (- n 1) 
-           )))
+(define (f-er fn-1 fn-2 fn-3 n)
+  (cond ((= n 0) (+ fn-1 (* 2 fn-2) (* 3 fn-3)))
+        ((< n 3) n)        
+        (else (f-er (+ fn-1 (* 2 fn-2) (* 3 fn-3)) 
+                    fn-1 
+                    fn-2 
+                    (- n 1)))))
 
 
 
