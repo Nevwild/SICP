@@ -1,10 +1,38 @@
-Exercise 1.11: A function f is defined by the rule that 
+;Exercise 1.11: 
+;A function f is defined by the rule that 
 
 f(n) = n if n<3
 and 
 f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
 
 ;Write a procedure that computes f by means of a recursive process. Write a procedure that computes f by means of an iterative process.
+
+;ANSWERS
+
+;Recursive
+
+(define (f n)
+  (cond ((< n 3) n)
+        (else (+ (f (- n 1)) 
+                 (* 2 (f (- n 2)))
+                 (* 3 (f (- n 3)))))))
+
+;Iterative
+
+(define (f n)
+  (f-ier 2 1 0 3 n))
+  
+(define (f-ier fn-1 fn-2 fn-3 n goal)
+  (cond ((= n goal) (+ fn-1 (* 2 fn-2) (* 3 fn-3)))
+        ((< goal 3) goal)
+        (else (f-ier (+ fn-1 (* 2 fn-2) (* 3 fn-3)) 
+                     fn-1 
+                     fn-2 
+                     (+ n 1) 
+                     goal))))
+
+
+;WORK FOR RECURSIVE
 
 (+ (f (- n 1)) 
    (* 2 (f (- n 2)))
@@ -527,57 +555,54 @@ f(n) = f(n−1) + 2f(n−2) + 3f(n−3) if n ≥ 3
                
 
 ;What if you hold the answers of (f(- n 1) 2f(- n 2) 3f(- n 3))))
-;you dont need to. you only need to hold the previous -2 and -3 because the previous answer is n... right?
+;Then you can just cycle the numbers through on each iteration. 
                                                              
 
-
-(define (f-ier n fn-1-result fn-2-result fn-3-result goal)
-  (cond (= goal n) running-total
-        ((< n 3) 
-         (f-ier (+ n  1) 
-                n 
-                fn-1-result 
-                fn-2-result 
-                fn-3-result
-                goal))
-        (else (f-ier (+ n 1) 
-                     (+ fn-1-result 
-                        (* 2 fn-2-result) 
-                        (* 3 fn-3-result)) 
-                     fn-1-result 
-                     fn-2-result 
+(define (f n)
+  (f-ier 2 1 0 3 n))
+  
+(define (f-ier fn-1 fn-2 fn-3 n goal)
+  (cond ((= n goal) (+ fn-1 (* 2 fn-2) (* 3 fn-3)))
+        ((< goal 3) goal)
+        (else (f-ier (+ fn-1 (* 2 fn-2) (* 3 fn-3)) 
+                     fn-1 
+                     fn-2 
+                     (+ n 1) 
                      goal))))
   
 ;Substitution
-(f-ier 3 2 1 0 4)
-  (cond (= 4 2) (+ fn-1-result 
-                   (* 2 fn-2-result) 
-                   (* 3 fn-3-result))
-        (f-ier (+ n  1) 
-               n 
-               fn-1-result 
-               fn-2-result 
-               fn-3-result
-               goal))
 
-        (else (f-ier (+ n 1) 
-                     (+ fn-1-result 
-                        (* 2 fn-2-result) 
-                        (* 3 fn-3-result)) 
-                     fn-1-result 
-                     fn-2-result 
-                     goal))))
-
-
-
-
-
-
-    
- 
+(define (f 5)
+  (f-ier 2 1 0 3 5))
   
-  
-  
-  
-  
-    
+(f-ier 2 1 0 3 5)
+  (cond ((= 3 5) (+ 2 (* 2 1) (* 3 0)));#f
+        ((< 5 3) 5);#f
+        (else (f-ier  (+ 2 (* 2 1) (* 3 0)) 
+                      2 
+                      1 
+                      (+ 3 1) 
+                      5)))
+
+
+(f-ier 4 2 1 4 5)
+  (cond ((= 4 5) (+ 4 (* 2 2) (* 3 1)));#f
+        ((< 5 3) 5);#f
+        (else (f-ier  (+ 4 (* 2 2) (* 3 1)) 
+                      4 
+                      2
+                      (+ 4 1) 
+                      5)))
+
+
+(f-ier 11 4 2 5 5)
+  (cond ((= 5 5) (+ 11 (* 2 4) (* 3 2)));#t
+        ((< goal 3) goal)
+        (else (f-ier  (+ fn-1 (* 2 fn-2) (* 3 fn-3)) 
+                      fn-1 
+                      fn-2 
+                      (+ n 1) 
+                      goal)))
+
+25
+
