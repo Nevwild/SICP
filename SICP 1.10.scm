@@ -64,7 +64,7 @@ Values of following expressions
 ((A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 1 3)))))))))
 ((A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A (- 1 1) (A 1 (- 3 1)))))))))))
 ((A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 1 2))))))))))
-((A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A (- 1 1) (A 1 (- 2 1))))))))))))
+((A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A (- 1 1) (A 1 (- 2 1))))))))))));If you count the A's on this line you will note that they are equal to the parameter y. This means that the space complexity of Ackermann’s function is O(y). If you look at the SICP Lecture 1b (https://youtu.be/dlbMuv-jix8?t=29m25s) he states that the space complexity of the function will be O(x). This raises a question, what determines space complexity? Is it a single parameter? If so, what determines which parameter?
 ((A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 1 1)))))))))))
 ((A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 2))))))))))
 ((A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (A 0 (* 2 2))))))))))
