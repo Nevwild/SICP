@@ -21,7 +21,6 @@
     (if (= 10 a) a
       (left-slope-solver (+ 1 a))))
   (display 1)
-  (display 1)
   (left-slope-solver 1))
     
 
