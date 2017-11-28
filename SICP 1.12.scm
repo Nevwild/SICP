@@ -35,17 +35,17 @@
 (define (next-line x y z))
 
 
-;Finally, I looked at the footnote included above, and I saw the words "binomial coefficients" so I looked them up. I then looked up pascals triangle, and saw the relationship betwen pascals and binomial coefficients. This led to the discovery of n choose k, which was fairly easy to define recursively.  
+;Finally, I looked at the footnote included above, and I saw the words "binomial coefficients" so I looked them up. I then looked up pascals triangle, and saw the relationship betwen pascals and binomial coefficients. This led to the discovery of n choose k, which made a procuedure to print out the triangle fairly easy to define recursively.  
 
 (define (pascal)
-  (define (factorial n)
-    (define (iter product counter);chose iterative to prevent exceeding recursive depth. 
-      (if (> counter n)
-          product
-        (iter (* counter product)
-              (+ counter 1))))
-    (iter 1 1))
   (define (n-choose-k n k)
+    (define (factorial x)
+      (define (iter product counter);chose iterative to prevent exceeding recursive depth. 
+        (if (> counter x)
+            product
+          (iter (* counter product)
+                (+ counter 1))))
+      (iter 1 1))
     (/ (factorial n)
        (* (factorial k)
           (factorial (- n k)))))
@@ -56,5 +56,32 @@
           (else (line-solver n (+ k 1)))))
   (line-solver 0 0))
   
+
+;Here is a version that lets you calculate the value of any value from a row and column
+
+(define (pascal n k)
+  (define (n-choose-k n k)
+    (define (factorial x)
+      (define (iter product counter);chose iterative to prevent exceeding recursive depth. 
+        (if (> counter x)
+            product
+          (iter (* counter product)
+                (+ counter 1))))
+      (iter 1 1))
+    (/ (factorial n)
+       (* (factorial k)
+          (factorial (- n k)))))
+
+  (n-choose-k n k))
     
+
+;after looking at other solutions online I found that my initial instinct was on the right path, but only if i was able to calculate a specific value instead of printing out the triangle. This procedure takes the value and works its way up the triagle until it reaches the top, then solves from there. I was trying to start from the top and solve down, which is still something I'm not sure is possible. 
+
+
+(define (pascal row column)
+  (cond ((< row column) 0)
+        ((or (= 0 column) (= row column)) 1)
+        (else (+ (pascal (- 1 row) column)
+                 (pascal (- 1 row) (- 1 column))))))
+        
 
