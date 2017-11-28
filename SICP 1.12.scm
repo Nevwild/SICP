@@ -13,7 +13,7 @@
 
 
 
-
+;in this section I was attempting to build out a procedure that solved a pair, and used the return value to solve the pair on the line below. The problem with this was that I couldn't figure out how to do this in a way that printed things in the right order. I was getting the right answers, but never in the right order. 
 (define (Pascal)
   (define (left-slope-solver a)
     (display 1)
@@ -22,5 +22,39 @@
       (left-slope-solver (+ 1 a))))
   (display 1)
   (left-slope-solver 1))
+
+(define (pair-solver a b c)
+  (cond ((= 1 a) (pair-solver 1 (+ a b) (+ b c)));if at start of line, calculate out next line
+        ((= 1 c) (pair-solver (+ a b) (+ b c) 1));if at finish of line, finish line solver
+        (else (next-line (+ a b) (+ b c))   
+              )))
+
+((define (current-line a b c)
+   body))
+
+(define (next-line x y z))
+
+
+;Finally, I looked at the footnote included above, and I saw the words "binomial coefficients" so I looked them up. I then looked up pascals triangle, and saw the relationship betwen pascals and binomial coefficients. This led to the discovery of n choose k, which was fairly easy to define recursively.  
+
+(define (pascal)
+  (define (factorial n)
+    (define (iter product counter);chose iterative to prevent exceeding recursive depth. 
+      (if (> counter n)
+          product
+        (iter (* counter product)
+              (+ counter 1))))
+    (iter 1 1))
+  (define (n-choose-k n k)
+    (/ (factorial n)
+       (* (factorial k)
+          (factorial (- n k)))))
+  (define (line-solver n k)
+    (display (n-choose-k n k))
+    (cond ((= n 5) (n-choose-k n k));Keeps this thing from running forever, returns 1
+          ((= n k) (line-solver (+ n 1) 0))
+          (else (line-solver n (+ k 1)))))
+  (line-solver 0 0))
+  
     
 
